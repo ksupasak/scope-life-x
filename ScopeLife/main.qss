@@ -1,0 +1,92 @@
+
+
+
+QLabel#app_title{
+color:rgb(130,130,130);
+}
+
+QWidget#header_bg{
+background-color:rgba(218,232,251,225);
+}
+
+
+QWidget#welcome_stage_1{
+background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(74, 78, 86, 255), stop:1 rgba(41,45,55, 255));
+border-radius:6px;
+}
+
+
+
+
+QPushButton#p1_login_btn{
+background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(117, 168, 64, 255), stop:1 rgba(43,119,14, 255));
+color:rgb(252, 247, 246);
+border-radius:6px;
+}
+
+QPushButton#p1_login_btn:pressed{
+background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(117, 168, 64, 155), stop:1 rgba(43,119,14, 155));
+color:rgb(252, 247, 246);
+border-radius:6px;
+}
+
+
+
+
+QLineEdit#visit_search{
+background-color:rgb(77,77,77);
+color:rgb(218,232,251)
+}
+
+
+QCalendarWidget#visit_calendar{
+background-color:rgb(218,232,251);
+}
+
+
+
+
+
+
+
+QMainWindow{
+background-color:rgb(43,45,50);
+color:rgb(108,102,142);
+}
+
+QLabel{
+color:rgb(108,122,142);
+}
+
+
+QPushButton{
+background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(145,155,167, 255), stop:1 rgba(72, 81, 97, 255));
+color:rgb(252, 247, 246);
+border-radius:6px;
+}
+
+QPushButton:pressed{
+background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(145,155,167, 155), stop:1 rgba(72, 81, 97, 155));
+color:rgb(252, 247, 246);
+border-radius:6px;
+}
+
+QListWidget{
+background-color:rgba(218,232,251,225);
+}
+
+
+QGroupBox{
+background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(74, 78, 86, 255), stop:1 rgba(41,45,55, 255));
+border-radius:6px;
+}
+QRadioButton,QCheckBox{
+color:rgb(108,122,142);
+}
+
+
+QPlainTextEdit{
+background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(74, 78, 86, 255), stop:1 rgba(41,45,55, 255));
+border-radius:6px;
+color:rgb(128,128,128);
+}

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>AOC.png</file>
+        <file>main.qss</file>
+    </qresource>
+</RCC>
