@@ -49,9 +49,6 @@ VideoController::VideoController(QWidget *parent) :
     }
 
 
-    qDebug()<< "Camera Default : "<< defaultCameraInfo.description();
-
-    setCamera(defaultCameraInfo);
 
 
 
@@ -84,47 +81,86 @@ VideoController::~VideoController()
 
 void VideoController::setupCapturePreview(QCameraViewfinder *view)
 {
-    m_camera_capture->setViewfinder(view);
-    m_camera_capture->start();
+    this->preview = view;
+}
+
+void VideoController::stop()
+{
+    m_camera_session->stop();
+    if(!support_native_record){
+        m_camera_preview->stop();
+    }
+
+}
+
+void VideoController::startSession()
+{
+    stop();
+    m_camera_session->start();
+}
+
+void VideoController::startPreview()
+{
+    stop();
+    m_camera_preview->start();
+}
+
+void VideoController::prepare()
+{
+    qDebug()<< "Camera Default : "<< defaultCameraInfo.description();
+
+    setCamera(defaultCameraInfo);
+
 }
 
 
 
 void VideoController::setCamera(const QCameraInfo &cameraInfo)
 {
-    m_camera.reset(new QCamera(cameraInfo));
-    m_camera_capture.reset(new QCamera(cameraInfo));
+
+    m_camera_session.reset(new QCamera(cameraInfo));
+    m_camera_preview.reset(new QCamera(cameraInfo));
 
 
-
-    connect(m_camera.data(), &QCamera::stateChanged, this, &VideoController::updateCameraState);
-    connect(m_camera.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &VideoController::displayCameraError);
+   support_native_record = m_camera_preview->isCaptureModeSupported(QCamera::CaptureVideo);
 
 
+   // connect(m_camera.data(), &QCamera::stateChanged, this, &VideoController::updateCameraState);
+  //  connect(m_camera.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &VideoController::displayCameraError);
+
+  //  connect(m_camera_capture.data(), &QCamera::stateChanged, this, &VideoController::updateCameraState);
+   // connect(m_camera_capture.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &VideoController::displayCameraError);
 
 
-    m_mediaRecorder.reset(new QMediaRecorder(m_camera.data()));
+    if(support_native_record){
+
+    m_mediaRecorder.reset(new QMediaRecorder(m_camera_preview.data()));
     connect(m_mediaRecorder.data(), &QMediaRecorder::stateChanged, this, &VideoController::updateRecorderState);
-
     connect(m_mediaRecorder.data(), &QMediaRecorder::durationChanged, this, &VideoController::updateRecordTime);
     connect(m_mediaRecorder.data(), QOverload<QMediaRecorder::Error>::of(&QMediaRecorder::error),
             this, &VideoController::displayRecorderError);
+    configureVideoSettings();
 
-
+    }
 
 //    connect(ui->exposureCompensation, &QAbstractSlider::valueChanged, this, &MainWindow::setExposureCompensation);
 
-    m_camera->setViewfinder(ui->live);
+   m_camera_session->setViewfinder(ui->live);
+   m_camera_preview->setViewfinder(this->preview);
 
-    updateCameraState(m_camera->state());
+
+//    updateCameraState(m_camera->state());
+ //   updateCameraState(m_camera_capture->state());
 //    updateLockStatus(m_camera->lockStatus(), QCamera::UserRequest);
-    updateRecorderState(m_mediaRecorder->state());
+//    updateRecorderState(m_mediaRecorder->state());
 
-    m_imageCapture.reset(new QCameraImageCapture(m_camera_capture.data()));
+
+
+    m_imageCapture.reset(new QCameraImageCapture(m_camera_session.data()));
 
 
 //    connect(m_imageCapture.data(), &QCameraImageCapture::readyForCaptureChanged, this, &MainWindow::readyForCapture);
-    connect(m_imageCapture.data(), &QCameraImageCapture::imageCaptured, this, &VideoController::processCapturedImage);
+     connect(m_imageCapture.data(), &QCameraImageCapture::imageCaptured, this, &VideoController::processCapturedImage);
 //    connect(m_imageCapture.data(), &QCameraImageCapture::imageSaved, this, &MainWindow::imageSaved);
 //    connect(m_imageCapture.data(), QOverload<int, QCameraImageCapture::Error, const QString &>::of(&QCameraImageCapture::error),
 //            this, &MainWindow::displayCaptureError);
@@ -135,23 +171,24 @@ void VideoController::setCamera(const QCameraInfo &cameraInfo)
 //    ui->captureWidget->setTabEnabled(0, (m_camera->isCaptureModeSupported(QCamera::CaptureStillImage)));
 //    ui->captureWidget->setTabEnabled(1, (m_camera->isCaptureModeSupported(QCamera::CaptureVideo)));
 
-    m_mediaRecorder.reset(new QMediaRecorder(m_camera.data()));
-    connect(m_mediaRecorder.data(), &QMediaRecorder::stateChanged, this, &VideoController::updateRecorderState);
-
-
-
-    connect(m_mediaRecorder.data(), &QMediaRecorder::durationChanged, this, &VideoController::updateRecordTime);
-    connect(m_mediaRecorder.data(), QOverload<QMediaRecorder::Error>::of(&QMediaRecorder::error),
-            this, &VideoController::displayRecorderError);
-
-//    m_mediaRecorder->setMetaData(QMediaMetaData::Title, QVariant(QLatin1String("Test Title")));
 
 
     updateCaptureMode();
-    configureVideoSettings();
 
-    m_camera->start();
 
+  //  m_camera_preview->start();
+
+
+  // m_camera_session->start();
+  // m_camera->stop();
+  // m_camera_preview->start();
+  // m_camera_capture->stop();
+
+    if(!support_native_record){
+        ui->record_btn->setDisabled(true);
+    }else{
+        ui->record_btn->setDisabled(false);
+    }
 }
 
 
@@ -161,12 +198,12 @@ void VideoController::updateCaptureMode()
 
     QCamera::CaptureModes captureMode =  QCamera::CaptureVideo;
 
-    if (m_camera->isCaptureModeSupported(captureMode))
-        m_camera->setCaptureMode(captureMode);
+    if (m_camera_preview->isCaptureModeSupported(captureMode))
+        m_camera_preview->setCaptureMode(captureMode);
     else
-        m_camera->setCaptureMode(QCamera::CaptureStillImage);
+        m_camera_preview->setCaptureMode(QCamera::CaptureStillImage);
 
-    m_camera_capture->setCaptureMode(QCamera::CaptureStillImage);
+    m_camera_session->setCaptureMode(QCamera::CaptureStillImage);
 
 
 }
@@ -227,7 +264,7 @@ void VideoController::updateRecorderState(QMediaRecorder::State state)
 
 void VideoController::setExposureCompensation(int index)
 {
-    m_camera->exposure()->setExposureCompensation(index*0.5);
+    m_camera_session->exposure()->setExposureCompensation(index*0.5);
 }
 
 void VideoController::displayRecorderError()
@@ -237,7 +274,7 @@ void VideoController::displayRecorderError()
 
 void VideoController::displayCameraError()
 {
-    QMessageBox::warning(this, tr("Camera Error"), m_camera->errorString());
+    QMessageBox::warning(this, tr("Camera Error"), m_camera_session->errorString());
 }
 
 void VideoController::updateCameraDevice(QAction *action)
@@ -377,7 +414,8 @@ void VideoController::configureVideoSettings()
 {
 
 
-     m_camera->unlock();
+     m_camera_session->unlock();
+     m_camera_preview->unlock();
 
 
        QVideoEncoderSettings settings = m_mediaRecorder->videoSettings();
@@ -399,9 +437,10 @@ void VideoController::configureVideoSettings()
        m_mediaRecorder->setVideoSettings(settings);
        m_mediaRecorder->setContainerFormat("mp4");
 
-       m_camera->setCaptureMode(QCamera::CaptureVideo);
-       m_camera->focus();
-
+       m_camera_session->setCaptureMode(QCamera::CaptureVideo);
+       m_camera_session->focus();
+       m_camera_preview->setCaptureMode(QCamera::CaptureVideo);
+       m_camera_preview->focus();
 
        QAudioEncoderSettings audioSettings;
        m_mediaRecorder->setAudioSettings(audioSettings);
@@ -418,7 +457,8 @@ void VideoController::configureVideoSettings()
 
 
 
-    m_camera->locked();
+    m_camera_session->locked();
+    m_camera_preview->locked();
 
 
 }

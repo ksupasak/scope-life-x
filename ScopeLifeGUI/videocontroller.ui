@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1316</width>
-    <height>970</height>
+    <width>1800</width>
+    <height>1200</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -152,10 +152,28 @@
       </item>
       <item>
        <widget class="QWidget" name="widget_4" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
-          <width>250</width>
+          <width>400</width>
           <height>16777215</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
          </size>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -176,7 +194,7 @@
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>140</height>
+             <height>225</height>
             </size>
            </property>
            <property name="sizeIncrement">
@@ -233,52 +251,47 @@
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QWidget" name="widget_7" native="true">
-        <widget class="VideoSetting" name="video_setting" native="true">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>20</y>
-           <width>901</width>
-           <height>151</height>
-          </rect>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QWidget" name="widget_6" native="true">
-        <property name="maximumSize">
-         <size>
-          <width>300</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <widget class="QPushButton" name="record_btn">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>0</y>
-           <width>91</width>
-           <height>81</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Record</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="capture_btn">
-         <property name="geometry">
-          <rect>
-           <x>201</x>
-           <y>0</y>
-           <width>91</width>
-           <height>81</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Capture</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="VideoSetting" name="video_setting" native="true"/>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_6" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>400</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <widget class="QPushButton" name="record_btn">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>0</y>
+              <width>171</width>
+              <height>151</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Record</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="capture_btn">
+            <property name="geometry">
+             <rect>
+              <x>200</x>
+              <y>0</y>
+              <width>161</width>
+              <height>151</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Capture</string>
+            </property>
+           </widget>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>

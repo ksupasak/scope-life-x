@@ -77,10 +77,12 @@ MainWindow::MainWindow(QWidget *parent)
         connect(queue_process, SIGNAL(timeout()), this, SLOT(queue_timeout()));
         queue_process->start(1000);
 
-//        ui->stage->setCurrentIndex(2);
-
+       //
         ui->video->setupCapturePreview(ui->live);
+        ui->video->prepare();
+        ui->video->startPreview();
 
+        //ui->stage->setCurrentIndex(2);
 }
 
 MainWindow::~MainWindow()
@@ -121,7 +123,8 @@ void MainWindow::startCapture(const QUrl &url)
 
      core->setCurrentSession(current_session);
 
-    ui->stage->setCurrentIndex(2);
+     ui->stage->setCurrentIndex(2);
+     ui->video->startSession();
 }
 
 void MainWindow::backButton()
@@ -131,6 +134,7 @@ void MainWindow::backButton()
     }else
     if(ui->stage->currentIndex()==1){
          ui->stage->setCurrentIndex(0);
+         ui->video->startPreview();
     }
 }
 

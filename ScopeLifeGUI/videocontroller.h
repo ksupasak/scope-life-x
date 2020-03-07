@@ -33,6 +33,10 @@ public:
 
     void setupCapturePreview(QCameraViewfinder *view);
 
+    void stop();
+    void prepare();
+    void startSession();
+    void startPreview();
 
     void setCamera(const QCameraInfo &cameraInfo);
 
@@ -73,14 +77,16 @@ private slots:
 
 private:
 
+    bool support_native_record=false;
+
     CoreLib *core;
     MediaLibraryContext *media_context;
     Ui::VideoController *ui;
 
     QCameraInfo defaultCameraInfo;
 
-    QScopedPointer<QCamera> m_camera;
-    QScopedPointer<QCamera> m_camera_capture;
+    QScopedPointer<QCamera> m_camera_session;
+    QScopedPointer<QCamera> m_camera_preview;
 
     QScopedPointer<QCameraImageCapture> m_imageCapture;
     QScopedPointer<QMediaRecorder> m_mediaRecorder;
@@ -92,7 +98,7 @@ private:
     bool m_isCapturingImage = false;
     bool m_applicationExiting = false;
     QVariant boxValue(const QComboBox*) const;
-
+    QCameraViewfinder *preview;
 };
 
 #endif // VIDEOCONTROLLER_H
