@@ -30,7 +30,8 @@ private slots:
     void processCaptureImage(QString filename);
     void processFinish();
     void queue_timeout();
-
+    void captureImage();
+    void recordVideo();
 
     void on_start_btn_clicked();
 

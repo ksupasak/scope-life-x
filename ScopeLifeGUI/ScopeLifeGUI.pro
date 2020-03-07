@@ -49,3 +49,6 @@ FORMS += \
     videocontroller.ui \
     videosetting.ui \
     webcontroller.ui
+
+RESOURCES += \
+    Resources.qrc

@@ -99,6 +99,10 @@ private:
     bool m_applicationExiting = false;
     QVariant boxValue(const QComboBox*) const;
     QCameraViewfinder *preview;
+
+    int capture_counter=0;
+
+
 };
 
 #endif // VIDEOCONTROLLER_H

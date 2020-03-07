@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Appr1.png</file>
+        <file>Appr2.png</file>
+        <file>Appr3.png</file>
+        <file>Appr4.png</file>
+        <file>Appr5.png</file>
+        <file>Done.png</file>
+        <file>emr128.png</file>
+        <file>Image-Capture-icon.png</file>
+        <file>Video-Capture-icon.png</file>
+        <file>Shutter-01.wav</file>
+        <file>App-pause-1.png</file>
+        <file>App-pause-2.png</file>
+        <file>App-pause-3.png</file>
+        <file>Appr6.png</file>
+        <file>SCOPE-LIFE.png</file>
+    </qresource>
+</RCC>

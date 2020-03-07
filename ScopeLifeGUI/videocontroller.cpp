@@ -4,7 +4,7 @@
 #include <QMediaMetaData>
 #include <QMediaService>
 #include <QMediaRecorder>
-
+#include <QSound>
 //#include "videosettings.h"
 //#include "imagesettings.h"
 
@@ -52,6 +52,41 @@ VideoController::VideoController(QWidget *parent) :
 
 
 
+    QSize size(155,155);
+     QPixmap pixmap1(":/Appr4.png");
+     QIcon ButtonIcon(pixmap1);
+     ui->capture_btn->setIcon(ButtonIcon);
+     ui->capture_btn->setIconSize(size);
+     ui->capture_btn->setText("");
+     ui->capture_btn->setStyleSheet("background:rgba(255,255,255,0);border:0px");
+     ui->capture_status->setText("");
+
+//     ui->capture_btn->setIcon(QIcon());
+//     ui->capture_btn->setText("2");
+
+//     QPalette palette;
+//     palette.setBrush(ui->capture_btn->backgroundRole(), QBrush(pixmap1));
+//     ui->capture_btn->setFlat(true);
+//     ui->capture_btn->setAutoFillBackground(true);
+//     ui->capture_btn->setPalette(palette);
+
+
+
+     QPixmap pixmap2(":/Appr1.png");
+     QIcon ButtonIcon2(pixmap2);
+     ui->record_btn->setIcon(ButtonIcon2);
+     ui->record_btn->setIconSize(size);
+     ui->record_btn->setText("");
+     ui->record_btn->setStyleSheet("background:rgba(255,255,255,0);border:0px");
+     ui->record_status->setText("");
+
+
+//     QObject::connect(&ui->capture_status, SIGNAL(),
+//                      &this, SLOT(setText(const QString& text)));
+
+
+//     connect(ui->capture_status, &QWidget::mousePressEvent, this, &VideoController::on_capture_btn_clicked);
+
 }
 
 
@@ -97,6 +132,8 @@ void VideoController::startSession()
 {
     stop();
     m_camera_session->start();
+    capture_counter = 0;
+    ui->record_btn->setText("");
 }
 
 void VideoController::startPreview()
@@ -186,8 +223,25 @@ void VideoController::setCamera(const QCameraInfo &cameraInfo)
 
     if(!support_native_record){
         ui->record_btn->setDisabled(true);
+
+        QPixmap pixmap2(":/Appr6.png");
+        QIcon ButtonIcon2(pixmap2);
+        QSize size(155,155);
+        ui->record_btn->setIcon(ButtonIcon2);
+        ui->record_btn->setIconSize(size);
+        ui->record_btn->setText("");
+        ui->record_btn->setStyleSheet("background:rgba(255,255,255,0);border:0px");
+
     }else{
         ui->record_btn->setDisabled(false);
+
+        QPixmap pixmap2(":/Appr1.png");
+        QIcon ButtonIcon2(pixmap2);
+        QSize size(155,155);
+        ui->record_btn->setIcon(ButtonIcon2);
+        ui->record_btn->setIconSize(size);
+        ui->record_btn->setText("");
+        ui->record_btn->setStyleSheet("background:rgba(255,255,255,0);border:0px");
     }
 }
 
@@ -292,7 +346,7 @@ void VideoController::processCapturedImage(int requestId, const QImage& img)
     Q_UNUSED(requestId);
 
     qDebug()<<"Image Capturing";
-
+    QSound::play(":/Shutter-01.wav");
 
     QImage scaledImage = img.scaled(ui->preview->size(),
                                     Qt::KeepAspectRatio,
@@ -312,6 +366,19 @@ void VideoController::processCapturedImage(int requestId, const QImage& img)
         emit callbackErrorCapture("Image Caputre Error");
     }
 
+    QPixmap pixmap(":/Appr4.png");
+    QIcon ButtonIcon(pixmap);
+    QSize size(155,155);
+    ui->capture_btn->setIcon(ButtonIcon);
+    ui->capture_btn->setIconSize(size);
+    ui->capture_btn->setText("");
+    ui->capture_btn->setStyleSheet("background:rgba(255,255,255,0);border:0px");
+
+    capture_counter++;
+    ui->capture_status->setText(QString::number(capture_counter));
+
+
+
 
 //    displayCapturedImage();
 //    QTimer::singleShot(4000, this, &Camera::displayViewfinder);
@@ -327,6 +394,15 @@ void VideoController::record()
         if(m_mediaRecorder->status()==QMediaRecorder::RecordingStatus){
             m_mediaRecorder->stop();
             qDebug()<<"Video stop record  : "<<m_mediaRecorder->outputLocation();
+
+            QPixmap pixmap2(":/Appr1.png");
+            QIcon ButtonIcon2(pixmap2);
+            QSize size(155,155);
+            ui->record_btn->setIcon(ButtonIcon2);
+            ui->record_btn->setIconSize(size);
+            ui->record_btn->setText("");
+            ui->record_btn->setStyleSheet("background:rgba(255,255,255,0);border:0px");
+
 
         }else{
 
@@ -349,6 +425,15 @@ void VideoController::record()
 
             m_mediaRecorder->record();
 
+            QPixmap pixmap2(":/Appr3.png");
+            QIcon ButtonIcon2(pixmap2);
+            QSize size(155,155);
+            ui->record_btn->setIcon(ButtonIcon2);
+            ui->record_btn->setIconSize(size);
+            ui->record_btn->setText("");
+            ui->record_btn->setStyleSheet("background:rgba(255,255,255,0);border:0px");
+
+
 
         }
 
@@ -359,6 +444,16 @@ void VideoController::record()
 
 void VideoController::capture()
 {
+    QPixmap pixmap(":/Appr5.png");
+    QIcon ButtonIcon(pixmap);
+    QSize size(155,155);
+    ui->capture_btn->setIcon(ButtonIcon);
+    ui->capture_btn->setIconSize(size);
+    ui->capture_btn->setText("");
+    ui->capture_btn->setStyleSheet("background:rgba(255,255,255,0);border:0px");
+
+
+
      qDebug()<<"Start capture";
 //     m_camera->setCaptureMode(QCamera::CaptureStillImage);
      m_imageCapture->capture();

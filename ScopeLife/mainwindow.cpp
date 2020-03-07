@@ -83,6 +83,10 @@ MainWindow::MainWindow(QWidget *parent)
         ui->video->startPreview();
 
         //ui->stage->setCurrentIndex(2);
+
+
+        connect(ui->actionCapture, SIGNAL(triggered()), this, SLOT(captureImage()));
+        connect(ui->actionRecord, SIGNAL(triggered()), this, SLOT(recordVideo()));
 }
 
 MainWindow::~MainWindow()
@@ -198,6 +202,16 @@ void MainWindow::queue_timeout()
 //    }
 
 
+}
+
+void MainWindow::captureImage()
+{
+    ui->video->capture();
+}
+
+void MainWindow::recordVideo()
+{
+    ui->video->record();
 }
 
 void MainWindow::on_start_btn_clicked()
