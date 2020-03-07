@@ -1,0 +1,12 @@
+#ifndef SCOPELIFEGUI_GLOBAL_H
+#define SCOPELIFEGUI_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(SCOPELIFEGUI_LIBRARY)
+#  define SCOPELIFEGUI_EXPORT Q_DECL_EXPORT
+#else
+#  define SCOPELIFEGUI_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // SCOPELIFEGUI_GLOBAL_H
