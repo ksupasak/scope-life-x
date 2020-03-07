@@ -25,12 +25,20 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeLib/release/ -lScopeLifeLib
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeLib/debug/ -lScopeLifeLib
-else:unix: LIBS += -L$$OUT_PWD/../ScopeLifeLib/ -lScopeLifeLib
 
-INCLUDEPATH += $$PWD/../ScopeLifeLib
-DEPENDPATH += $$PWD/../ScopeLifeLib
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeGUI/release/ -lScopeLifeGUI
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeGUI/debug/ -lScopeLifeGUI
+else:unix: LIBS += -L$$OUT_PWD/../ScopeLifeGUI/ -lScopeLifeGUI
+
+INCLUDEPATH += $$PWD/../ScopeLifeGUI
+DEPENDPATH += $$PWD/../ScopeLifeGUI
+
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeCore/release/ -lScopeLifeCore
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeCore/debug/ -lScopeLifeCore
@@ -41,14 +49,10 @@ DEPENDPATH += $$PWD/../ScopeLifeCore
 
 
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
-
 RESOURCES += \
     Resources.qrc
 
 DISTFILES += \
     main.qss
+
 

@@ -12,6 +12,11 @@ JobQueue::JobQueue(QUrl request, QString filename, QDateTime stamp)
     this->attach_request = QUrl("");
 }
 
+JobQueue::~JobQueue()
+{
+
+}
+
 int JobQueue::getType() const
 {
     return type;

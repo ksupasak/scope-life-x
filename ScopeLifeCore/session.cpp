@@ -5,6 +5,11 @@ Session::Session()
 
 }
 
+Session::~Session()
+{
+
+}
+
 void Session::parseUrl(const QUrl &url)
 {
 

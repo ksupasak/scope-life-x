@@ -6,11 +6,14 @@
 #include <corelib.h>
 #include <QWebEnginePage>
 #include "customwebenginepage.h"
+
+#include "ScopeLifeGUI_global.h"
+
 namespace Ui {
 class WebController;
 }
 
-class WebController : public QWidget
+class SCOPELIFEGUI_EXPORT WebController : public QWidget
 {
     Q_OBJECT
 

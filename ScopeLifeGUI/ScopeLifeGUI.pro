@@ -1,4 +1,5 @@
-QT -= gui
+#QT -= gui
+QT += widgets core gui multimedia multimediawidgets serialport  webenginewidgets network sql
 
 TEMPLATE = lib
 DEFINES += SCOPELIFEGUI_LIBRARY
@@ -17,14 +18,34 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    scopelifegui.cpp
+    customwebenginepage.cpp \
+    scopelifegui.cpp \
+    videocontroller.cpp \
+    videosetting.cpp \
+    webcontroller.cpp
 
 HEADERS += \
     ScopeLifeGUI_global.h \
-    scopelifegui.h
+    customwebenginepage.h \
+    scopelifegui.h \
+    videocontroller.h \
+    videosetting.h \
+    webcontroller.h
 
 # Default rules for deployment.
 unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeCore/release/ -lScopeLifeCore
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeCore/debug/ -lScopeLifeCore
+else:unix: LIBS += -L$$OUT_PWD/../ScopeLifeCore/ -lScopeLifeCore
+
+INCLUDEPATH += $$PWD/../ScopeLifeCore
+DEPENDPATH += $$PWD/../ScopeLifeCore
+
+FORMS += \
+    videocontroller.ui \
+    videosetting.ui \
+    webcontroller.ui

@@ -8,11 +8,12 @@
 #include <medialibrarycontext.h>
 #include <QComboBox>
 #include <QCameraViewfinder>
+#include "ScopeLifeGUI_global.h"
 namespace Ui {
 class VideoController;
 }
 
-class VideoController : public QWidget
+class SCOPELIFEGUI_EXPORT VideoController : public QWidget
 {
 
     Q_OBJECT

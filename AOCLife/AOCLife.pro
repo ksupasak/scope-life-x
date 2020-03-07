@@ -30,12 +30,6 @@ FORMS += \
 
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeLib/release/ -lScopeLifeLib
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeLib/debug/ -lScopeLifeLib
-else:unix: LIBS += -L$$OUT_PWD/../ScopeLifeLib/ -lScopeLifeLib
-
-INCLUDEPATH += $$PWD/../ScopeLifeLib
-DEPENDPATH += $$PWD/../ScopeLifeLib
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeCore/release/ -lScopeLifeCore
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeCore/debug/ -lScopeLifeCore
@@ -43,6 +37,14 @@ else:unix: LIBS += -L$$OUT_PWD/../ScopeLifeCore/ -lScopeLifeCore
 
 INCLUDEPATH += $$PWD/../ScopeLifeCore
 DEPENDPATH += $$PWD/../ScopeLifeCore
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeGUI/release/ -lScopeLifeGUI
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeGUI/debug/ -lScopeLifeGUI
+else:unix: LIBS += -L$$OUT_PWD/../ScopeLifeGUI/ -lScopeLifeGUI
+
+INCLUDEPATH += $$PWD/../ScopeLifeGUI
+DEPENDPATH += $$PWD/../ScopeLifeGUI
 
 
 # Default rules for deployment.
@@ -55,3 +57,4 @@ RESOURCES += \
 
 DISTFILES += \
     main.qss
+

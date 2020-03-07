@@ -2,11 +2,15 @@
 #define SESSION_H
 #include <QString>
 #include <QUrl>
-class Session
+
+#include "ScopeLifeCore_global.h"
+
+
+class SCOPELIFECORE_EXPORT Session
 {
 public:
     Session();
-
+    ~Session();
     void parseUrl(const QUrl&url);
 
     QString getpatientHn() const;

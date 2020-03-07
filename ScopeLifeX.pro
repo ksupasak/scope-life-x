@@ -1,9 +1,9 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
+    ScopeLifeGUI \
     AOCLife \
     ScopeLife \
-    ScopeLifeCore \
-    ScopeLifeLib
+    ScopeLifeCore
 
- CONFIG += ordered
+

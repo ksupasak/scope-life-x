@@ -8,7 +8,9 @@
 #include <QSqlError>
 #include "corelib.h"
 
-class MediaLibraryContext
+#include "ScopeLifeCore_global.h"
+
+class MEDIALIBRARYCONTEXT_EXPORT MediaLibraryContext
 
 {
 

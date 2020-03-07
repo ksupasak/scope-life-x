@@ -9,12 +9,13 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QTextCodec>
+#include "ScopeLifeCore_global.h"
 
-class JobQueue
+class JOBQUEUE_EXPORT JobQueue
 {
 public:
     JobQueue(QUrl url, QString filename, QDateTime stamp);
-
+    ~JobQueue();
     int getType() const;
     void setType(int value);
 
