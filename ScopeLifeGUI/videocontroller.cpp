@@ -14,6 +14,7 @@ VideoController::VideoController(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->capture_counter = 0 ;
 
     // init camera
 
@@ -86,6 +87,11 @@ VideoController::VideoController(QWidget *parent) :
 
 
 //     connect(ui->capture_status, &QWidget::mousePressEvent, this, &VideoController::on_capture_btn_clicked);
+
+        probe = new QVideoProbe;
+
+        connect(probe, &QVideoProbe::videoFrameProbed, this, &VideoController::processVideoFrame);
+
 
 }
 
@@ -178,6 +184,11 @@ void VideoController::setCamera(const QCameraInfo &cameraInfo)
             this, &VideoController::displayRecorderError);
     configureVideoSettings();
 
+    }else{
+
+         m_mediaRecorder.reset(new QMediaRecorder(m_camera_session.data()));
+
+
     }
 
 //    connect(ui->exposureCompensation, &QAbstractSlider::valueChanged, this, &MainWindow::setExposureCompensation);
@@ -221,7 +232,7 @@ void VideoController::setCamera(const QCameraInfo &cameraInfo)
   // m_camera_preview->start();
   // m_camera_capture->stop();
 
-    if(!support_native_record){
+    if(false){
         ui->record_btn->setDisabled(true);
 
         QPixmap pixmap2(":/Appr6.png");
@@ -243,6 +254,10 @@ void VideoController::setCamera(const QCameraInfo &cameraInfo)
         ui->record_btn->setText("");
         ui->record_btn->setStyleSheet("background:rgba(255,255,255,0);border:0px");
     }
+
+
+    probe->setSource(m_camera_session.data());
+
 }
 
 
@@ -503,6 +518,13 @@ void VideoController::configureImageSettings()
     //        m_imageSettings = settingsDialog.imageSettings();
     //        m_imageCapture->setEncodingSettings(m_imageSettings);
 
+}
+
+void VideoController::processVideoFrame(QVideoFrame frame)
+{
+    qDebug() << frame.size() << frame.pixelFormat();
+
+    ui->msg->setText("");
 }
 
 void VideoController::configureVideoSettings()

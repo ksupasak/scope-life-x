@@ -8,6 +8,7 @@
 #include <medialibrarycontext.h>
 #include <QComboBox>
 #include <QCameraViewfinder>
+#include <QVideoProbe>
 #include "ScopeLifeGUI_global.h"
 namespace Ui {
 class VideoController;
@@ -75,6 +76,8 @@ private slots:
 
     void configureImageSettings();
 
+    void processVideoFrame(QVideoFrame frame);
+
 private:
 
     bool support_native_record=false;
@@ -100,8 +103,9 @@ private:
     QVariant boxValue(const QComboBox*) const;
     QCameraViewfinder *preview;
 
-    int capture_counter=0;
+    int capture_counter;
 
+    QVideoProbe *probe;
 
 };
 

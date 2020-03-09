@@ -4,6 +4,8 @@
 #include <QUrlQuery>
 #include <QTimer>
 #include "emrsession.h"
+#include <QFuture>
+#include <QtConcurrent>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -82,11 +84,26 @@ MainWindow::MainWindow(QWidget *parent)
         ui->video->prepare();
         ui->video->startPreview();
 
-        //ui->stage->setCurrentIndex(2);
-
+       // ui->stage->setCurrentIndex(2);
+       // ui->video->startSession();
 
         connect(ui->actionCapture, SIGNAL(triggered()), this, SLOT(captureImage()));
         connect(ui->actionRecord, SIGNAL(triggered()), this, SLOT(recordVideo()));
+
+
+        pedal_switch = new HIDPedal(this);
+
+        //connect(pedal_switch, &HIDPedal::key, this, &MainWindow::processKey);
+
+        pedal_switch_process = new QTimer(this);
+
+ //       QTimer::singleShot(100,QtConcurrent::run(this,&MainWindow::startKey));
+
+//        QFuture<void> future = QtConcurrent::run(startKey);
+       // pedal_switch_process->singleShot(1000,this, &MainWindow::startKey);
+
+
+        QFuture<void> future1 = QtConcurrent::run(this,&MainWindow::startKey);
 }
 
 MainWindow::~MainWindow()
@@ -214,7 +231,23 @@ void MainWindow::recordVideo()
     ui->video->record();
 }
 
+void MainWindow::processKey(int key)
+{
+    ui->video->capture();
+}
+
 void MainWindow::on_start_btn_clicked()
 {
-     ui->stage->setCurrentIndex(1);
+    ui->stage->setCurrentIndex(1);
+}
+
+void MainWindow::startKey()
+{
+    qDebug()<<"Start Key()";
+    pedal_switch->start();
+}
+
+void MainWindow::on_info_btn_clicked()
+{
+     pedal_switch->start();
 }

@@ -6,7 +6,7 @@
 #include "corelib.h"
 #include "medialibrarycontext.h"
 #include "session.h"
-
+#include "hidpedal.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,15 +32,24 @@ private slots:
     void queue_timeout();
     void captureImage();
     void recordVideo();
+    void processKey(int key);
 
     void on_start_btn_clicked();
 
+    void on_info_btn_clicked();
+
 private:
+
+    void startKey();
+
     Ui::MainWindow *ui;
     CoreLib *core;
     MediaLibraryContext * media_context;
     Session *current_session;
     QTimer *queue_process;
+    QTimer *pedal_switch_process;
+    HIDPedal *pedal_switch;
+
 
 };
 #endif // MAINWINDOW_H

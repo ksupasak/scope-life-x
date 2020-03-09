@@ -4,6 +4,7 @@ SUBDIRS += \
     ScopeLifeGUI \
     AOCLife \
     ScopeLife \
-    ScopeLifeCore
+    ScopeLifeCore \
+    ScopeLifeHW
 
 

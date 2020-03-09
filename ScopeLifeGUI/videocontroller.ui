@@ -256,6 +256,23 @@
           <widget class="VideoSetting" name="video_setting" native="true"/>
          </item>
          <item>
+          <widget class="QWidget" name="widget_9" native="true">
+           <widget class="QLabel" name="msg">
+            <property name="geometry">
+             <rect>
+              <x>40</x>
+              <y>20</y>
+              <width>521</width>
+              <height>81</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </widget>
+         </item>
+         <item>
           <widget class="QWidget" name="widget_6" native="true">
            <property name="maximumSize">
             <size>
@@ -328,9 +345,9 @@
            <widget class="QLabel" name="capture_status">
             <property name="geometry">
              <rect>
-              <x>250</x>
+              <x>260</x>
               <y>50</y>
-              <width>61</width>
+              <width>41</width>
               <height>51</height>
              </rect>
             </property>

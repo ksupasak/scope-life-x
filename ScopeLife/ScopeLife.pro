@@ -1,4 +1,4 @@
-QT       += core gui multimedia multimediawidgets webenginewidgets serialport network sql
+QT       += core gui multimedia multimediawidgets webenginewidgets serialport network sql concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -53,6 +53,28 @@ RESOURCES += \
     Resources.qrc
 
 DISTFILES += \
+    icon.png \
     main.qss
 
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../lib/ -lavcodec
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lavcodec
+else:unix: LIBS += -L$$PWD/../lib/ -lavcodec
 
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../lib/ -lavutil
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lavutil
+else:unix: LIBS += -L$$PWD/../lib/ -lavutil
+
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+
+RC_ICONS = icon.ico
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeHW/release/ -lScopeLifeHW
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ScopeLifeHW/debug/ -lScopeLifeHW
+else:unix: LIBS += -L$$OUT_PWD/../ScopeLifeHW/ -lScopeLifeHW
+
+INCLUDEPATH += $$PWD/../ScopeLifeHW
+DEPENDPATH += $$PWD/../ScopeLifeHW
