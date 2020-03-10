@@ -31,6 +31,8 @@ public:
     void setValue(QString key, QVariant value);
     QVariant getValue(QString key);
     QString getStringValue(QString key);
+    QString getStringValue(QString key, QString default_value);
+
     bool has(QString key);
 
     void log(QString msg);
@@ -44,6 +46,8 @@ public:
     void setCurrentSession(Session *value);
     bool hasCurrentSession();
     void finishSession();
+
+
 
 private:
     QString * default_path;

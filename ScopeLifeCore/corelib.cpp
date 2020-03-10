@@ -34,7 +34,7 @@ void CoreLib::loadConfig()
         QByteArray data = jsonFile.readAll();
         QJsonDocument doc = QJsonDocument().fromJson(data);
         this->config = doc.object().toVariantMap();
-        qDebug()<<"config = "<<config<<" "<<config.contains("about")<<config.value("emr-host");
+        qDebug()<<"config = "<<config<<"\n"<<config.contains("about")<<config.value("system_host");
         jsonFile.close();
     }else{
 //        this->config = QVariantMap;
@@ -74,9 +74,19 @@ QVariant CoreLib::getValue(QString key)
     return config.value(key);
 }
 
+
+
 QString CoreLib::getStringValue(QString key)
 {
     return config.value(key).toString();
+}
+
+QString CoreLib::getStringValue(QString key, QString default_value)
+{
+    if(!has(key)){
+        setValue(key, default_value);
+    }
+    return getStringValue(key);
 }
 
 bool CoreLib::has(QString key)

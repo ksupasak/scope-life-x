@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+    CoreLib* getCore();
 
 
 private slots:
@@ -37,6 +37,10 @@ private slots:
     void on_start_btn_clicked();
 
     void on_info_btn_clicked();
+
+    void on_setting_btn_clicked();
+
+    void exitApplication();
 
 private:
 

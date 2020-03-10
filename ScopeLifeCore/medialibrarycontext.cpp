@@ -157,7 +157,15 @@ QString MediaLibraryContext::generateInternalStoragePath(QHash<QString, QString>
 
 //        QString pattern = ":home/Desktop/db/:date/:hn/:name/:id/:hn-:full_name-:stamp";
 
-        QString pattern = ":home/scopelife/db/:date/:hn/:doc_name/:id/:hn|:full_name|:stamp";
+//        QString pattern = ":home/scopelife/db/:date/:hn/:doc_name/:id/:hn|:full_name|:stamp";
+
+          QString pattern;
+
+
+          if(type=="image")pattern = this->core->getStringValue("image_path");
+
+          if(type=="video")pattern = this->core->getStringValue("video_path");
+
 
 
         QStringList result;

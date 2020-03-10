@@ -62,7 +62,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="title">
          <property name="text">
           <string>ระบบห้องส่องกล้อง</string>
          </property>
@@ -72,7 +72,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="clock">
          <property name="text">
           <string>00:00</string>
          </property>
@@ -87,78 +87,142 @@
     <item>
      <widget class="QStackedWidget" name="stage">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
-      <widget class="QWidget" name="page_4">
-       <widget class="QPushButton" name="info_btn">
-        <property name="geometry">
-         <rect>
-          <x>130</x>
-          <y>420</y>
-          <width>181</width>
-          <height>141</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Info</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="start_btn">
-        <property name="geometry">
-         <rect>
-          <x>400</x>
-          <y>420</y>
-          <width>181</width>
-          <height>141</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Start</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="library_btn">
-        <property name="geometry">
-         <rect>
-          <x>640</x>
-          <y>420</y>
-          <width>181</width>
-          <height>141</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Library</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="setting_btn">
-        <property name="geometry">
-         <rect>
-          <x>920</x>
-          <y>420</y>
-          <width>181</width>
-          <height>141</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Setting</string>
-        </property>
-       </widget>
-       <widget class="QCameraViewfinder" name="live" native="true">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1241</width>
-          <height>741</height>
-         </rect>
-        </property>
-       </widget>
-       <zorder>live</zorder>
-       <zorder>info_btn</zorder>
-       <zorder>start_btn</zorder>
-       <zorder>library_btn</zorder>
-       <zorder>setting_btn</zorder>
+      <widget class="QWidget" name="home_page">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QCameraViewfinder" name="live" native="true"/>
+        </item>
+        <item>
+         <widget class="QWidget" name="widget_4" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>200</height>
+           </size>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_3" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>1024</width>
+               <height>0</height>
+              </size>
+             </property>
+             <widget class="QPushButton" name="setting_btn">
+              <property name="geometry">
+               <rect>
+                <x>780</x>
+                <y>10</y>
+                <width>221</width>
+                <height>161</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Setting</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="library_btn">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="geometry">
+               <rect>
+                <x>530</x>
+                <y>10</y>
+                <width>221</width>
+                <height>161</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Library</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="start_btn">
+              <property name="geometry">
+               <rect>
+                <x>280</x>
+                <y>10</y>
+                <width>211</width>
+                <height>161</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Start</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="info_btn">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>10</y>
+                <width>211</width>
+                <height>161</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Info</string>
+              </property>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
-      <widget class="QWidget" name="page">
+      <widget class="QWidget" name="web_page">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="leftMargin">
          <number>0</number>
@@ -177,7 +241,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_2">
+      <widget class="QWidget" name="capture_page">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <property name="leftMargin">
          <number>0</number>
@@ -196,30 +260,12 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_3">
-       <widget class="QPushButton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>480</y>
-          <width>112</width>
-          <height>32</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-       <widget class="VideoController" name="widget" native="true">
-        <property name="geometry">
-         <rect>
-          <x>270</x>
-          <y>270</y>
-          <width>301</width>
-          <height>211</height>
-         </rect>
-        </property>
-       </widget>
+      <widget class="QWidget" name="setting_page">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="SettingController" name="setting" native="true"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -240,6 +286,7 @@
     </property>
     <addaction name="actionCapture"/>
     <addaction name="actionRecord"/>
+    <addaction name="actionExit"/>
    </widget>
    <addaction name="menuControls"/>
   </widget>
@@ -270,6 +317,11 @@
     <string>R</string>
    </property>
   </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -288,6 +340,12 @@
    <class>VideoController</class>
    <extends>QWidget</extends>
    <header location="global">videocontroller.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SettingController</class>
+   <extends>QWidget</extends>
+   <header location="global">settingcontroller.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

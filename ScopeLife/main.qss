@@ -2,7 +2,7 @@
 
 
 QLabel#app_title{
-color:rgb(130,130,130);
+color:rgb(160,160,160);
 }
 
 QWidget#header_bg{
@@ -55,7 +55,7 @@ color:rgb(108,102,142);
 }
 
 QLabel{
-color:rgb(108,122,142);
+color:rgb(158,172,192);
 }
 
 
@@ -71,6 +71,12 @@ color:rgb(252, 247, 246);
 border-radius:6px;
 }
 
+
+QPushButton:disabled{
+background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(145,155,167, 55), stop:1 rgba(72, 81, 97, 55));
+color:rgb(252, 247, 246,100);
+border-radius:6px;
+}
 QListWidget{
 background-color:rgba(218,232,251,225);
 }

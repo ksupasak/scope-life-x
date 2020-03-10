@@ -20,6 +20,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     customwebenginepage.cpp \
     scopelifegui.cpp \
+    settingcontroller.cpp \
     videocontroller.cpp \
     videosetting.cpp \
     webcontroller.cpp
@@ -28,6 +29,7 @@ HEADERS += \
     ScopeLifeGUI_global.h \
     customwebenginepage.h \
     scopelifegui.h \
+    settingcontroller.h \
     videocontroller.h \
     videosetting.h \
     webcontroller.h
@@ -46,6 +48,7 @@ INCLUDEPATH += $$PWD/../ScopeLifeCore
 DEPENDPATH += $$PWD/../ScopeLifeCore
 
 FORMS += \
+    settingcontroller.ui \
     videocontroller.ui \
     videosetting.ui \
     webcontroller.ui

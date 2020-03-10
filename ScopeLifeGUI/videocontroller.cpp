@@ -232,7 +232,7 @@ void VideoController::setCamera(const QCameraInfo &cameraInfo)
   // m_camera_preview->start();
   // m_camera_capture->stop();
 
-    if(false){
+    if(!support_native_record){
         ui->record_btn->setDisabled(true);
 
         QPixmap pixmap2(":/Appr6.png");
@@ -369,7 +369,7 @@ void VideoController::processCapturedImage(int requestId, const QImage& img)
 
     ui->preview->setPixmap(QPixmap::fromImage(scaledImage));
 
-    QString filename = media_context->generateInternalStoragePath("img")+".jpeg";
+    QString filename = media_context->generateInternalStoragePath("image")+".jpeg";
 
     qDebug()<<"Image Path : "<<filename;
 

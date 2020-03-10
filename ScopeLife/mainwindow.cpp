@@ -10,7 +10,7 @@
 #include <libavcodec/avcodec.h>
 #include <libavutil/opt.h>
 #include <libavutil/imgutils.h>
-
+#include <qmessagebox.h>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -19,16 +19,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    ui->stage->setCurrentIndex(0);
+
 
 //    QUrl url("http://gi.emr-life.com/endo/Home/index");
 //    QUrl url("https://cuor.emr-life.com/cuor/Home/index");
 //    QUrl url("http://mfer.emr-life.com/endo/Home/index");
 //    QUrl url("http://gi.emr-life.com/endo/Home/index");
 
-       QUrl url("http://gi.emr-life.com/endo/Colono/create?patient_id=54b38ac9790f9b2146000024&record_name=test&parent_id=5e413539790f9b46ff000003");
-
-       ui->web->setUrl(url);
 
 
     // Test
@@ -37,6 +34,53 @@ MainWindow::MainWindow(QWidget *parent)
        this->core = new CoreLib();
 
        this->core->loadConfig();
+
+       this->core->getStringValue("system_mode","scope_life");
+
+       this->core->getStringValue("system_name","mfer");
+       this->core->getStringValue("system_host","https://mfer.emr-life.com/endo/Home/index");
+       this->core->getStringValue("system_title","GI-CU ออกหน่วย รพ.พระจอมเกล้าเพชรบุรี 2563");
+
+       this->core->getStringValue("system_startup","window");
+
+
+       this->core->getStringValue("input_source_1","default");
+       this->core->getStringValue("input_source_2","-");
+
+       this->core->getStringValue("image_resolution","source");
+       this->core->getStringValue("image_quality","90");
+
+       this->core->getStringValue("video_resolution","full_hd");
+       this->core->getStringValue("video_codec","libx264");
+
+       this->core->getStringValue("image_path",":home/scopelife/db/:date/:hn/:doc_name/:id/:hn|:full_name|:stamp");
+       this->core->getStringValue("video_path",":home/scopelife/db/:date/:hn/:doc_name/:id/:hn|:full_name|:stamp");
+
+       this->core->getStringValue("video_record_limit","2GB");
+       this->core->getStringValue("video_record_auto","false");
+
+
+       this->core->getStringValue("timer_1_enabled","true");
+       this->core->getStringValue("timer_1_title","Intubation");
+       this->core->getStringValue("timer_1_key","cecal_intubation_time");
+
+       this->core->getStringValue("timer_2_enabled","true");
+       this->core->getStringValue("timer_2_title","Withdrawal");
+       this->core->getStringValue("timer_2_key","withdrawal_time");
+
+
+
+       ui->stage->setCurrentIndex(0);
+
+//       QUrl url("http://gi.emr-life.com/endo/Colono/create?patient_id=54b38ac9790f9b2146000024&record_name=test&parent_id=5e413539790f9b46ff000003");
+
+       QUrl url(this->core->getStringValue("system_host"));
+
+       ui->web->setUrl(url);
+
+
+
+       this->core->saveConfig();
 
        this->media_context = new MediaLibraryContext(this->core);
 
@@ -68,6 +112,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         ui->web->setCore(core);
         ui->video->setCore(core);
+        ui->setting->setCore(core);
         ui->video->setMediaLibraryContext(media_context);
 
         connect(ui->web, &WebController::startCapture, this, &MainWindow::startCapture);
@@ -76,6 +121,7 @@ MainWindow::MainWindow(QWidget *parent)
         connect(ui->video, &VideoController::back, this, &MainWindow::backButton);
         connect(ui->video, &VideoController::finish, this, &MainWindow::processFinish);
         connect(ui->video, &VideoController::callbackCaptureImage, this, &MainWindow::processCaptureImage);
+        connect(ui->setting, &SettingController::back, this, &MainWindow::backButton);
 
 
         // queue tiemr
@@ -93,6 +139,8 @@ MainWindow::MainWindow(QWidget *parent)
 
         connect(ui->actionCapture, SIGNAL(triggered()), this, SLOT(captureImage()));
         connect(ui->actionRecord, SIGNAL(triggered()), this, SLOT(recordVideo()));
+        connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(exitApplication()));
+
 
 
         pedal_switch = new HIDPedal(this);
@@ -108,11 +156,21 @@ MainWindow::MainWindow(QWidget *parent)
 
 
         QFuture<void> future1 = QtConcurrent::run(this,&MainWindow::startKey);
+
+
+        ui->title->setText(core->getStringValue("system_title"));
+
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+CoreLib* MainWindow::getCore()
+{
+    return this->core;
 }
 
 
@@ -160,6 +218,10 @@ void MainWindow::backButton()
     if(ui->stage->currentIndex()==1){
          ui->stage->setCurrentIndex(0);
          ui->video->startPreview();
+    }else
+    if(ui->stage->currentIndex()==3){
+             ui->stage->setCurrentIndex(0);
+
     }
 }
 
@@ -187,7 +249,9 @@ void MainWindow::processFinish()
 void MainWindow::queue_timeout()
 {
 
+    QDateTime now = QDateTime::currentDateTime();
 
+    ui->clock->setText(now.toString("hh:mm:ss"));
     this->core->processQueue();
 
 //    bool sum_job=false;
@@ -261,4 +325,23 @@ void MainWindow::startKey()
 void MainWindow::on_info_btn_clicked()
 {
      pedal_switch->start();
+}
+
+void MainWindow::on_setting_btn_clicked()
+{
+    ui->stage->setCurrentIndex(3);
+    ui->setting->load();
+
+}
+
+void MainWindow::exitApplication()
+{
+
+    QMessageBox msgBox;
+    msgBox.setText("Quit");
+    msgBox.setInformativeText("Exit ScopeLife");
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    int ret = msgBox.exec();
+    if(ret == QMessageBox::Ok)exit(0);
 }
