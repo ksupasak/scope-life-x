@@ -7,6 +7,10 @@
 #include <QFuture>
 #include <QtConcurrent>
 
+#include <libavcodec/avcodec.h>
+#include <libavutil/opt.h>
+#include <libavutil/imgutils.h>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -84,8 +88,8 @@ MainWindow::MainWindow(QWidget *parent)
         ui->video->prepare();
         ui->video->startPreview();
 
-       // ui->stage->setCurrentIndex(2);
-       // ui->video->startSession();
+        ui->stage->setCurrentIndex(2);
+        ui->video->startSession();
 
         connect(ui->actionCapture, SIGNAL(triggered()), this, SLOT(captureImage()));
         connect(ui->actionRecord, SIGNAL(triggered()), this, SLOT(recordVideo()));
@@ -93,7 +97,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         pedal_switch = new HIDPedal(this);
 
-        //connect(pedal_switch, &HIDPedal::key, this, &MainWindow::processKey);
+        connect(pedal_switch, &HIDPedal::key, this, &MainWindow::processKey);
 
         pedal_switch_process = new QTimer(this);
 
@@ -233,7 +237,14 @@ void MainWindow::recordVideo()
 
 void MainWindow::processKey(int key)
 {
+    if(key==1||key==2)
     ui->video->capture();
+
+    if(key==1)qDebug()<<"Left Button";
+    if(key==2)qDebug()<<"Middle Button";
+    if(key==4)qDebug()<<"Right Button";
+
+
 }
 
 void MainWindow::on_start_btn_clicked()

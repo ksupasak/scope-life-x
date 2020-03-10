@@ -107,6 +107,10 @@ private:
 
     QVideoProbe *probe;
 
+    // FFMPEG recording
+
+    bool ffmpeg_recording=false;
+
 };
 
 #endif // VIDEOCONTROLLER_H

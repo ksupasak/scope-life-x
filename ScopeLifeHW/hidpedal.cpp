@@ -1089,22 +1089,18 @@ int HIDPedal::start()
              // printf("\nTesting interrupt read using endpoint %02X...\n", endpoint_in);
               r = libusb_interrupt_transfer(handle, endpoint_in, report_buffer, size, &size, 5000);
 
-              qDebug()<<"Read";
+              qDebug()<<"Pedal Check";
 
               if (r >= 0) {
 
-                  //printf("%x",report_buffer[0]);
 
                   if((report_buffer[0]&1)!=0){
-                      printf("Left\n");
                       emit key(0);
                   }
                   if((report_buffer[0]&2)!=0){
-                      printf("Middle\n");
                       emit key(1);
                   }
                   if((report_buffer[0]&4)!=0){
-                      printf("Right\n");
                       emit key(2);
                   }
 

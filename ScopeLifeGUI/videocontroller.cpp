@@ -405,6 +405,7 @@ void VideoController::processCapturedImage(int requestId, const QImage& img)
 void VideoController::record()
 {
 
+        qDebug()<<"record hit";
 
         if(m_mediaRecorder->status()==QMediaRecorder::RecordingStatus){
             m_mediaRecorder->stop();
@@ -422,23 +423,33 @@ void VideoController::record()
         }else{
 
 
-    //        configureVideoSettings();
+//            configureVideoSettings();
 
-    //        qDebug()<<" Codec "<<m_videoSettings.codec();
-    //        qDebug()<<" Resolution "<<m_videoSettings.resolution();
-    //        qDebug()<<" Rate "<<m_videoSettings.bitRate();
-    //        qDebug()<<" Quality "<<m_videoSettings.quality();
-    //        qDebug()<<" FPS "<<m_videoSettings.frameRate();
-    //        m_mediaRecorder->setVideoSettings(m_videoSettings);
+//            qDebug()<<" Codec "<<m_videoSettings.codec();
+//            qDebug()<<" Resolution "<<m_videoSettings.resolution();
+//            qDebug()<<" Rate "<<m_videoSettings.bitRate();
+//            qDebug()<<" Quality "<<m_videoSettings.quality();
+//            qDebug()<<" FPS "<<m_videoSettings.frameRate();
+//            m_mediaRecorder->setVideoSettings(m_videoSettings);
 
 
 
             QString filename = media_context->generateInternalStoragePath("video")+".mp4";
+
+
+            if(support_native_record){
+
             m_mediaRecorder->setMetaData(QMediaMetaData::Title, QVariant(QLatin1String("Test Title")));
             m_mediaRecorder->setOutputLocation(QUrl::fromLocalFile(filename));
             qDebug()<<"Video start record : "<<filename;
 
             m_mediaRecorder->record();
+
+            }else{
+
+
+
+            }
 
             QPixmap pixmap2(":/Appr3.png");
             QIcon ButtonIcon2(pixmap2);

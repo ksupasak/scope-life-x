@@ -58,6 +58,7 @@ win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../lib/ -lavcodec
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lavcodec
 else:unix: LIBS += -L$$PWD/../lib/ -lavcodec
 
+
 INCLUDEPATH += $$PWD/../include
 DEPENDPATH += $$PWD/../include
 
