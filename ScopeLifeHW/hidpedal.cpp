@@ -1116,7 +1116,7 @@ int HIDPedal::start()
 #if defined(__MACH__)
 #
 #else
-#   Sleep(100);
+   QThread::sleep(1);
 #endif
 
 
