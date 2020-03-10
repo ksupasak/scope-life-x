@@ -932,7 +932,7 @@ static int test_device(uint16_t vid, uint16_t pid)
     case USE_XBOX:
         CALL_CHECK_CLOSE(display_xbox_status(handle), handle);
         CALL_CHECK_CLOSE(set_xbox_actuators(handle, 128, 222), handle);
-        msleep(2000);
+
         CALL_CHECK_CLOSE(set_xbox_actuators(handle, 0, 0), handle);
         break;
     case USE_HID:
@@ -1113,7 +1113,12 @@ int HIDPedal::start()
               free(report_buffer);
           }
 
-         Sleep(100);
+#if defined(__MACH__)
+#
+#else
+#   Sleep(100);
+#endif
+
 
       }
 

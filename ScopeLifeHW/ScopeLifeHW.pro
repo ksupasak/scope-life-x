@@ -37,7 +37,9 @@ unix {
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../lib/ -llibusb-1.0
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -llibusb-1.0
-else:unix: LIBS += -L$$PWD/../lib/ -llibusb-1.0
+else:unix: LIBS += -L$$PWD/../lib/ -lusb-1.0.0
 
 INCLUDEPATH += $$PWD/../include
 DEPENDPATH += $$PWD/../include
+
+

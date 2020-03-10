@@ -55,7 +55,7 @@
 #include <getopt.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <windows.h>
+//#include <windows.h>
 
 #define	REPLACE_GETOPT		/* use this getopt as the system getopt(3) */
 
@@ -116,7 +116,7 @@ static const char illoptstring[] = "unknown option -- %s";
 static void
 _vwarnx(const char *fmt,va_list ap)
 {
-  (void)fprintf(stderr,"%s: ",__progname);
+//  (void)fprintf(stderr,"%s: ",__progname);
   if (fmt != NULL)
     (void)vfprintf(stderr,fmt,ap);
   (void)fprintf(stderr,"\n");
