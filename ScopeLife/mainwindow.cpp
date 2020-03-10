@@ -88,8 +88,8 @@ MainWindow::MainWindow(QWidget *parent)
         ui->video->prepare();
         ui->video->startPreview();
 
-        ui->stage->setCurrentIndex(2);
-        ui->video->startSession();
+       // ui->stage->setCurrentIndex(2);
+       // ui->video->startSession();
 
         connect(ui->actionCapture, SIGNAL(triggered()), this, SLOT(captureImage()));
         connect(ui->actionRecord, SIGNAL(triggered()), this, SLOT(recordVideo()));
