@@ -18,7 +18,7 @@ VideoController::VideoController(QWidget *parent) :
 
     // init camera
 
-    QString default_input = "FaceTime HD Camera (Built-in)";
+    QString default_input = core->getStringValue("input_source_1");
 
     // default source input from configure
 

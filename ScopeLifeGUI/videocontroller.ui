@@ -154,13 +154,13 @@
        <widget class="QWidget" name="widget_4" native="true">
         <property name="minimumSize">
          <size>
-          <width>400</width>
+          <width>260</width>
           <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>400</width>
+          <width>260</width>
           <height>16777215</height>
          </size>
         </property>
@@ -194,7 +194,7 @@
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>225</height>
+             <height>150</height>
             </size>
            </property>
            <property name="sizeIncrement">
@@ -215,18 +215,107 @@
           </widget>
          </item>
          <item>
-          <widget class="QWidget" name="widget_5" native="true">
-           <widget class="QCameraViewfinder" name="preview_2" native="true">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>50</y>
-              <width>181</width>
-              <height>131</height>
-             </rect>
-            </property>
-           </widget>
+          <widget class="QLabel" name="preview_2">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="sizeIncrement">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background:rgb(128, 128, 128)</string>
+           </property>
+           <property name="text">
+            <string>Preview</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="preview_3">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="sizeIncrement">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background:rgb(128, 128, 128)</string>
+           </property>
+           <property name="text">
+            <string>Preview</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="preview_4">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="sizeIncrement">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background:rgb(128, 128, 128)</string>
+           </property>
+           <property name="text">
+            <string>Preview</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="preview_5">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="sizeIncrement">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background:rgb(128, 128, 128)</string>
+           </property>
+           <property name="text">
+            <string>Preview</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_5" native="true"/>
          </item>
         </layout>
        </widget>
