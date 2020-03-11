@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
        this->core->getStringValue("system_startup","window");
 
 
-       this->core->getStringValue("input_source_1","default");
+       this->core->getStringValue("input_source_1","USB Capture SDI");
        this->core->getStringValue("input_source_2","-");
 
        this->core->getStringValue("image_resolution","source");

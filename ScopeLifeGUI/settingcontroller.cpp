@@ -27,12 +27,17 @@ void SettingController::load()
 {
     core->loadConfig();
 
+
+
     ui->system_mode->setText(core->getStringValue("system_mode"));
     ui->system_name->setText(core->getStringValue("system_name"));
     ui->system_host->setText(core->getStringValue("system_host"));
     ui->system_title->setText(core->getStringValue("system_title"));
     ui->system_mode->setText(core->getStringValue("system_mode"));
     ui->system_startup->setText(core->getStringValue("system_startup"));
+
+    ui->input_source_1->setText(core->getStringValue("input_source_1"));
+    ui->input_source_2->setText(core->getStringValue("input_source_2"));
 
     ui->image_path->setText(core->getStringValue("image_path"));
     ui->image_resolution->setText(core->getStringValue("image_resolution"));
@@ -60,6 +65,10 @@ void SettingController::save()
     core->setValue("system_host", ui->system_host->text());
     core->setValue("system_title", ui->system_title->text());
     core->setValue("system_startup", ui->system_startup->text());
+
+    core->setValue("input_source_1", ui->input_source_1->text());
+    core->setValue("input_source_2", ui->input_source_2->text());
+
 
     core->setValue("image_path", ui->image_path->text());
     core->setValue("image_resolution", ui->image_resolution->text());
