@@ -3,5 +3,6 @@
         <file>splash.png</file>
         <file>main.qss</file>
         <file>icon.ico</file>
+        <file>logo.png</file>
     </qresource>
 </RCC>
