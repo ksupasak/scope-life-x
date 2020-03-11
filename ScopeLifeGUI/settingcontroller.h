@@ -3,12 +3,13 @@
 
 #include <QWidget>
 #include "corelib.h"
+#include "ScopeLifeGUI_global.h"
 
 namespace Ui {
 class SettingController;
 }
 
-class SettingController : public QWidget
+class SCOPELIFEGUI_EXPORT SettingController : public QWidget
 {
     Q_OBJECT
 

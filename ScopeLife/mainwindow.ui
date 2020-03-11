@@ -87,19 +87,26 @@
     <item>
      <widget class="QStackedWidget" name="stage">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="home_page">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QCameraViewfinder" name="live" native="true"/>
+         <widget class="QCameraViewfinder" name="live" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>400</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QWidget" name="widget_4" native="true">
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>200</height>
+            <height>300</height>
            </size>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -277,7 +284,7 @@
      <x>0</x>
      <y>0</y>
      <width>1254</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuControls">
@@ -325,15 +332,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QCameraViewfinder</class>
+   <class>SettingController</class>
    <extends>QWidget</extends>
-   <header>qcameraviewfinder.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>WebController</class>
-   <extends>QWidget</extends>
-   <header location="global">webcontroller.h</header>
+   <header location="global">settingcontroller.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -343,9 +344,15 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>SettingController</class>
+   <class>WebController</class>
    <extends>QWidget</extends>
-   <header location="global">settingcontroller.h</header>
+   <header location="global">webcontroller.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QCameraViewfinder</class>
+   <extends>QWidget</extends>
+   <header>qcameraviewfinder.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
