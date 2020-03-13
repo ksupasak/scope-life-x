@@ -16,39 +16,6 @@ VideoController::VideoController(QWidget *parent) :
 
     this->capture_counter = 0 ;
 
-    // init camera
-
-    QString default_input = core->getStringValue("input_source_1");
-
-    // default source input from configure
-
-    const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
-
-    QCameraInfo last;
-
-    qDebug()<< "Number of Camera : "<< availableCameras.length();
-
-    for (const QCameraInfo &cameraInfo : availableCameras) {
-
-        qDebug()<< "Camera : "<< cameraInfo.description();
-
-
-         if(default_input.compare(cameraInfo.description())==0){
-             defaultCameraInfo = cameraInfo;
-         }
-
-
-        last = cameraInfo;
-
-    }
-
-
-    if (defaultCameraInfo.isNull()){
-
-        defaultCameraInfo = QCameraInfo::defaultCamera();
-
-    }
-
 
 
 
@@ -150,7 +117,46 @@ void VideoController::startPreview()
 
 void VideoController::prepare()
 {
+
+    // init camera
+
+    QString default_input = core->getStringValue("input_source_1");
+
+    // default source input from configure
+
+    const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
+
+    QCameraInfo last;
+
+    qDebug()<< "Number of Camera : "<< availableCameras.length();
+
+    for (const QCameraInfo &cameraInfo : availableCameras) {
+
+        qDebug()<< "Camera : "<< cameraInfo.description();
+
+
+         if(default_input.compare(cameraInfo.description())==0){
+             defaultCameraInfo = cameraInfo;
+         }
+
+
+        last = cameraInfo;
+
+    }
+
+
+    if (defaultCameraInfo.isNull()){
+
+        defaultCameraInfo = QCameraInfo::defaultCamera();
+
+    }
+
+
+
     qDebug()<< "Camera Default : "<< defaultCameraInfo.description();
+
+
+
 
     setCamera(defaultCameraInfo);
 
@@ -256,7 +262,7 @@ void VideoController::setCamera(const QCameraInfo &cameraInfo)
     }
 
 
-    probe->setSource(m_camera_session.data());
+  //  probe->setSource(m_camera_session.data());
 
 }
 
@@ -367,7 +373,29 @@ void VideoController::processCapturedImage(int requestId, const QImage& img)
                                     Qt::KeepAspectRatio,
                                     Qt::SmoothTransformation);
 
+
+
+
     ui->preview->setPixmap(QPixmap::fromImage(scaledImage));
+
+
+    if(images.size()>0){
+        ui->img_1->setPixmap(QPixmap::fromImage(images.last()));
+    }
+    if(images.size()>1){
+        ui->img_2->setPixmap(QPixmap::fromImage(images.at(images.size()-2)));
+    }
+    if(images.size()>2){
+        ui->img_3->setPixmap(QPixmap::fromImage(images.at(images.size()-3)));
+    }
+    if(images.size()>3){
+        ui->img_4->setPixmap(QPixmap::fromImage(images.at(images.size()-4)));
+    }
+
+
+    images.append(scaledImage);
+
+
 
     QString filename = media_context->generateInternalStoragePath("image")+".jpeg";
 

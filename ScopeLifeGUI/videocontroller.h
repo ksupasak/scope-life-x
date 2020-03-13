@@ -103,6 +103,8 @@ private:
     QVariant boxValue(const QComboBox*) const;
     QCameraViewfinder *preview;
 
+    QVector<QImage> images;
+
     int capture_counter;
 
     QVideoProbe *probe;

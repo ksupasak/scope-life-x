@@ -109,17 +109,22 @@ void SettingController::on_load_btn_clicked()
 
 void SettingController::on_quit_btn_clicked()
 {
-    QMessageBox msgBox;
-    msgBox.setText("Quit");
-    msgBox.setInformativeText("Exit with Save?");
-    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Discard | QMessageBox::Cancel);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    int ret = msgBox.exec();
-    if(ret == QMessageBox::Ok){
+    if(core->getStringValue("system_startup").compare("window")==0){
+        QMessageBox msgBox;
+        msgBox.setText("Quit");
+        msgBox.setInformativeText("Exit with Save?");
+        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        int ret = msgBox.exec();
+        if(ret == QMessageBox::Ok){
+            this->save();
+            exit(0);
+        }
+        if(ret == QMessageBox::Discard){
+            exit(0);
+        }
+    }else{
         this->save();
-        exit(0);
-    }
-    if(ret == QMessageBox::Discard){
         exit(0);
     }
 
